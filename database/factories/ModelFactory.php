@@ -27,9 +27,20 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
     $name = $faker->words(rand(1,3), true);
+
     return [
         'name' => title_case($name),
         'slug' => str_slug($name),
         'description' => $faker->optional()->paragraphs(rand(1,3), true),
+    ];
+});
+
+
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Post::class, function (Faker\Generator $faker) {
+    return [
+        'title' => title_case($faker->words(rand(1,3), true)),
+        'body' => $faker->paragraphs(rand(1,4), true),
     ];
 });
