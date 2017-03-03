@@ -111,6 +111,7 @@ class ProjectTest extends TestCase
         $project->open();
 
         $this->assertTrue($project->isOpen());
+        $this->assertTrue($project->open);
     }
 
 
@@ -124,5 +125,6 @@ class ProjectTest extends TestCase
         $project->close();
 
         $this->assertTrue($project->isClosed());
+        $this->assertFalse($project->open);
     }
 }
