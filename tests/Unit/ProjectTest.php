@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Post;
 use App\Project;
 use Tests\TestCase;
 use Illuminate\Database\QueryException;
@@ -56,5 +57,17 @@ class ProjectTest extends TestCase
         $project2 = factory(Project::class)->create([
             'slug' => $slug,
         ]);
+    }
+
+    /** @test */
+    public function a_project_has_many_posts()
+    {
+        $project = factory(Project::class)->create();
+
+        $post = factory(Post::class)->create([
+            'project_id' => $project->id,
+        ]);
+
+        $this->assertEquals($project->id, $post->project->id);
     }
 }

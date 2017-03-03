@@ -36,11 +36,13 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
 });
 
 
-
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
+    $project = App\Project::inRandomOrder()->first() ?? factory(App\Project::class)->create();
+
     return [
         'title' => title_case($faker->words(rand(1,3), true)),
         'body' => $faker->paragraphs(rand(1,4), true),
+        'project_id' => $project->id,
     ];
 });

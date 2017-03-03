@@ -27,4 +27,14 @@ class PostTest extends TestCase
 
         $this->assertNotNull($post->body);
     }
+
+    /** @test */
+    public function a_post_belongs_to_a_project()
+    {
+        $project = factory(Project::class)->create();
+        $post = factory(Post::class)->make();
+        $project->posts()->save($post);
+
+        $this->assertEquals($post->project->id, $project->id);
+    }
 }
