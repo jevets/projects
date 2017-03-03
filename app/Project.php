@@ -13,8 +13,18 @@ class Project extends Model
     /**
      * @var array
      */
+    protected $casts = [
+        'open' => 'boolean',
+    ];
+
+    /**
+     * @var array
+     */
     protected $fillable = [
-        'name', 'slug', 'description'
+        'name',
+        'slug',
+        'description',
+        'open',
     ];
 
     /**
@@ -23,5 +33,63 @@ class Project extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Open the project
+     *
+     * @return void
+     */
+    public function open()
+    {
+        $this->update(['open' => true]);
+    }
+
+    /**
+     * Close the project
+     *
+     * @return void
+     */
+    public function close()
+    {
+        $this->update(['open' => false]);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOpen()
+    {
+        return !! $this->open;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isClosed()
+    {
+        return !!! $this->open;
+    }
+
+    /**
+     * Scope a query to get open projects
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOpen($query)
+    {
+        return $query->where('open', true);
+    }
+
+    /**
+     * Scope a query to get closed projects
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeClosed($query)
+    {
+        return $query->where('open', false);
     }
 }

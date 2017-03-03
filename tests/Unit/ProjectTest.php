@@ -70,4 +70,59 @@ class ProjectTest extends TestCase
 
         $this->assertEquals($project->id, $post->project->id);
     }
+
+    /** @test */
+    public function a_project_is_either_open_or_closed()
+    {
+        $project = factory(Project::class)->create([
+            'open' => true,
+        ]);
+
+        $this->assertTrue($project->isOpen());
+        $this->assertFalse($project->isClosed());
+    }
+
+    /** @test */
+    public function an_Open_query_scope_returns_only_open_projects()
+    {
+        $open = factory(Project::class, 5)->create([
+            'open' => true,
+        ]);
+        $closed = factory(Project::class, 5)->create([
+            'open' => false,
+        ]);
+
+        $open->each(function($project) {
+            $this->assertTrue($project->isOpen());
+        });
+
+        $closed->each(function($project) {
+            $this->assertTrue($project->isClosed());
+        });
+    }
+
+    /** @test */
+    public function a_project_may_be_opened_via_its_open_method()
+    {
+        $project = factory(Project::class)->create([
+            'open' => false,
+        ]);
+
+        $project->open();
+
+        $this->assertTrue($project->isOpen());
+    }
+
+
+    /** @test */
+    public function a_project_may_be_closed_via_its_close_method()
+    {
+        $project = factory(Project::class)->create([
+            'open' => true,
+        ]);
+
+        $project->close();
+
+        $this->assertTrue($project->isClosed());
+    }
 }
