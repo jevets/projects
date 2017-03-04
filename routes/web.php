@@ -12,10 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('projects.index', [
-        'projects' => \App\Project::all(),
-    ]);
-})->name('my.projects');
+    $user = Auth::user();
+
+    $projects = $user->load(['projects' => function ($query) {
+        return $query->whereOpen();
+    }])->projects;
+
+    return view('projects.index', compact('projects'));
+})
+->middleware('auth')
+->name('my.projects');
+
 
 Auth::routes();
 

@@ -86,7 +86,7 @@ class Project extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeOpen($query)
+    public function scopeWhereOpen($query)
     {
         return $query->where('open', true);
     }
@@ -97,7 +97,7 @@ class Project extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeClosed($query)
+    public function scopeWhereClosed($query)
     {
         return $query->where('open', false);
     }

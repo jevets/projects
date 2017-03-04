@@ -96,23 +96,25 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
-    public function an_Open_query_scope_returns_only_open_projects()
+    public function a_WhereOpen_query_scope_returns_only_open_projects()
     {
         $open = factory(Project::class, 5)->create([
             'open' => true,
-        ]);
-        $closed = factory(Project::class, 5)->create([
-            'open' => false,
-        ]);
-
-        $open->each(function($project) {
+        ])->each(function($project) {
             $this->assertTrue($project->isOpen());
         });
+    }
 
-        $closed->each(function($project) {
+    /** @test */
+    public function a_WhereClosed_query_scope_returns_only_closed_projects()
+    {
+        $closed = factory(Project::class, 5)->create([
+            'open' => false,
+        ])->each(function($project) {
             $this->assertTrue($project->isClosed());
         });
     }
+
 
     /** @test */
     public function a_project_may_be_opened_via_its_open_method()
