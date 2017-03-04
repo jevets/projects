@@ -11,9 +11,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ProjectUsersTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     /** @test */
-    public function a_project_has_many_members()
+    public function member_users_may_be_added()
     {
         $project = factory(Project::class)->create();
 
@@ -28,5 +28,19 @@ class ProjectUsersTest extends TestCase
                 $project->members->contains($user)
             );
         });
+    }
+
+    /** @test */
+    public function admin_users_may_be_added()
+    {
+        $project = factory(Project::class)->create();
+
+        $user = factory(User::class)->create();
+
+        $project->addAdmin($user);
+
+        $this->assertTrue(
+            $project->admins->contains($user)
+        );
     }
 }

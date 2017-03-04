@@ -41,7 +41,8 @@ class Project extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+                    ->withPivot('is_admin');
     }
 
     /**
@@ -51,7 +52,21 @@ class Project extends Model
      */
     public function getMembersAttribute()
     {
-        return $this->users->where('is_admin', false);
+        return $this->users->filter(function ($user) {
+            return ! $user->pivot->is_admin;
+        });
+    }
+
+    /**
+     * Get the admin users for the project
+     *
+     * @return Illuminate\Support\Collection
+     */
+    public function getAdminsAttribute()
+    {
+        return $this->users->filter(function ($user) {
+            return $user->pivot->is_admin;
+        });
     }
 
     /**
@@ -63,7 +78,21 @@ class Project extends Model
      */
     public function addMember(User $user, $is_admin = false)
     {
-        $this->users()->attach($user->id);
+        $this->users()->attach($user->id, [
+            'is_admin' => $is_admin
+        ]);
+    }
+
+    /**
+     * Add a User (as Admin) to the project
+     *
+     * @param User $user
+     * @param boolean $is_admin false
+     * @return boolean
+     */
+    public function addAdmin(User $user)
+    {
+        $this->addMember($user, true);
     }
 
     /**
