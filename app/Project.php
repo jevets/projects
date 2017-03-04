@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Post;
-use App\User;
 use App\Support\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,14 +33,6 @@ class Project extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
-    }
-
-    /**
-     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**
