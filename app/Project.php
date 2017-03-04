@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Post;
+use App\User;
 use App\Support\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,36 @@ class Project extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Get the member users for this project
+     *
+     * @return Illuminate\Support\Collection
+     */
+    public function getMembersAttribute()
+    {
+        return $this->users->where('is_admin', false);
+    }
+
+    /**
+     * Add a User (as Member) to the project
+     *
+     * @param User $user
+     * @param boolean $is_admin false
+     * @return boolean
+     */
+    public function addMember(User $user, $is_admin = false)
+    {
+        $this->users()->attach($user->id);
     }
 
     /**

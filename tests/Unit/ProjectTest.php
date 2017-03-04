@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\User;
 use App\Post;
 use App\Project;
 use Tests\TestCase;
