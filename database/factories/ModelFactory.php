@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
-    $name = $faker->words(rand(1, 3), true);
+    $name = $faker->unique()->words(rand(1, 3), true);
 
     return [
         'name'        => title_case($name),

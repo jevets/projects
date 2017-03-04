@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('projects.index', [
+        'projects' => \App\Project::all(),
+    ]);
+})->name('my.projects');
 
 Auth::routes();
 

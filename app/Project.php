@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Post;
 use App\Support\Sluggable;
 use Illuminate\Database\Eloquent\Model;
