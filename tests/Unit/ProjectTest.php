@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Post;
+use App\User;
 use App\Project;
 use Tests\TestCase;
 use Illuminate\Database\QueryException;
@@ -57,6 +58,18 @@ class ProjectTest extends TestCase
         $project2 = factory(Project::class)->create([
             'slug' => $slug,
         ]);
+    }
+
+    /** @test */
+    public function a_project_belongs_to_a_user()
+    {
+        $user = factory(User::class)->create();
+
+        $project = factory(Project::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $this->assertEquals($user->id, $project->user->id);
     }
 
     /** @test */

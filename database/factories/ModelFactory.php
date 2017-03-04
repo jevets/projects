@@ -27,10 +27,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
     $name = $faker->unique()->words(rand(1, 3), true);
 
+    $user = App\User::inRandomOrder()->first() ?? factory(App\User::class)->create();
+
     return [
         'name'        => title_case($name),
         'slug'        => str_slug($name),
         'description' => $faker->optional()->paragraphs(rand(1, 3), true),
+        'user_id'     => $user->id,
     ];
 });
 
