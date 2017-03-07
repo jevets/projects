@@ -2,7 +2,7 @@
     <tbody>
         @foreach ($users as $user)
             <tr>
-                <td>
+                <td width="40%">
                     {{ $user->name }}
                 </td>
                 <td>

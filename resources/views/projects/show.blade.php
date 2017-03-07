@@ -5,6 +5,8 @@
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
 
+                @include('projects._nav-crumb', compact('project'))
+
                 <h1 class="page-header">
                     {{ $project->name }}
                 </h1>
@@ -53,6 +55,11 @@
                     @slot('title', 'Danger Zone')
                     @slot('body')
                         <form action="{{ route('projects.destroy', $project) }}" method="POST" class="form-inline">
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+                            <p>
+                                <strong>There is no undo!</strong> The project and all of its posts will be deleted. 
+                            </p>
                             <button type="submit" class="btn btn-danger">
                                 <i class="fa fa-times-circle"></i>
                                 Delete Project
