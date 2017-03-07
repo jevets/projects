@@ -75,7 +75,9 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $project->load('users');
+
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -87,7 +89,15 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $project->update($request->except('_token'));
+
+        return redirect()
+            ->route('projects.show', $project)
+            ->with('message', 'Project updated');
     }
 
     /**

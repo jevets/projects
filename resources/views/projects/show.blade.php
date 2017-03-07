@@ -62,7 +62,7 @@
                             </p>
                             <button type="submit" class="btn btn-danger">
                                 <i class="fa fa-times-circle"></i>
-                                Delete Project
+                                Delete this Project and all its Posts
                             </button>
                         </form>
                     @endslot
