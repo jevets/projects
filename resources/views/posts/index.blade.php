@@ -15,7 +15,14 @@
                     </small>
                 </h1>
 
-                @include('posts._timeline', ['posts' => $project->posts])
+                @if (! $project->posts->isEmpty())
+                    @include('posts._timeline', ['posts' => $project->posts])
+                @else
+                    @component('_.alert')
+                        No posts to show
+                    @endcomponent
+                    @include('projects._description', compact('project'))
+                @endif
 
             </div>
         </div>

@@ -24,12 +24,7 @@
 
                 <hr>
 
-                @component('_.panel', ['type' => 'info'])
-                    @slot('title', 'Project Description')
-                    @slot('body')
-                        {{ $project->description }}
-                    @endslot
-                @endcomponent
+                @include('projects._description', compact('project'))
 
                 <h2 class="page-header">Users</h2>
 
