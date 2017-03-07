@@ -4,15 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-
-                <p>
-                    <small>
-                        <a href="{{ route('posts.index', [$project]) }}" class="btn btn-default btn-sm">
-                            <i class="fa fa-chevron-left"></i>
-                            back to timeline
-                        </a>
-                    </small>
-                </p>
+                
+                @include('projects._nav-crumb', compact('project'))
 
                 <h1 class="page-header">
                     {{ $project->name }}
