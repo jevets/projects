@@ -79,6 +79,14 @@
             </div>
         </nav>
 
+        @if (session('message'))
+            <div class="container">
+                <div class="alert alert-info">
+                    {{ session('message') }}
+                </div>
+            </div>
+        @endif
+
         @yield('content')
     </div>
 
