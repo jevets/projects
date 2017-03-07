@@ -8,7 +8,8 @@
                 <h1 class="page-header">
                     My Projects
                     <small>
-                        <a href="#" class="btn btn-link btn-xs">
+                        <a href="{{ route('projects.create') }}" class="btn btn-link btn-xs">
+                            <i class="fa fa-plus-circle"></i>
                             Add New
                         </a>
                     </small>
@@ -16,7 +17,10 @@
 
                 <div class="list-group">
                     @foreach ($projects as $project)
-                        <a href="#" class="list-group-item">
+                        <a href="{{ route('posts.index', $project) }}" class="list-group-item">
+                            @if (auth()->user()->isProjectAdmin($project))
+                                <i class="fa fa-star"></i>
+                            @endif
                             {{ $project->name }}
                         </a>
                     @endforeach

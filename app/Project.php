@@ -33,7 +33,8 @@ class Project extends Model
      */
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class)
+            ->orderBy('created_at', 'desc');
     }
 
     /**
@@ -43,6 +44,17 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class)
                     ->withPivot('is_admin');
+    }
+
+    /**
+     * Get the projects for a given User
+     *
+     * @param User $user
+     * @return \Illuminate\Support\Collection
+     */
+    public static function forUser(User $user)
+    {
+        return $user->projects;
     }
 
     /**

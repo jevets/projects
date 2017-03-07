@@ -44,4 +44,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * @return boolean
+     */
+    public function isProjectAdmin(Project $project)
+    {
+        return $project->admins->contains($this);
+    }
 }
