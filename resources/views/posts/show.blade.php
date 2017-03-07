@@ -27,8 +27,32 @@
                             {{ $post->title }}
                         </h2>
                         <div class="post-body">
-                            {{ $post->body }}
+                            {!! Markdown::convertToHtml($post->body) !!}
                         </div>
+                    @endslot
+                @endcomponent
+
+                <h2 class="page-header">
+                    Comments
+                </h2>
+
+                @foreach ($post->comments as $comment)
+                    @include('comments._card', compact('comment'))
+                @endforeach
+
+                @component('_.panel', ['type' => 'success'])
+                    @slot('title', 'Add a Comment')
+                    @slot('body')
+                        <form action="{{ route('comments.store', [$project, $post]) }}" method="POST">
+                            {{ csrf_field() }}
+                            @include('comments._form')
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fa fa-comment"></i>
+                                    Add Comment
+                                </button>
+                            </div>
+                        </form>
                     @endslot
                 @endcomponent
 

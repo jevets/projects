@@ -10,9 +10,7 @@
             @endif
 
             @if ($title ?? false)
-                <strong class="panel-title">
-                    {{ $title }}
-                </strong>
+                <div class="panel-title">{{ $title }}</div>
             @endif
         </div>
     @endif

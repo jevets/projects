@@ -26,4 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('{project}/{post}', 'ProjectPostsController@show')
         ->name('posts.show');
 
+    Route::post('{project}/posts/{post}/comments', 'ProjectPostCommentsController@store')
+        ->name('comments.store');
+
 });

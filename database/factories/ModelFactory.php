@@ -48,3 +48,16 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'teaser'     => $faker->optional()->sentence,
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
+    $post = App\Post::inRandomOrder()->first() ?? factory(App\Post::class)->create();
+    $user = App\User::inRandomOrder()->first() ?? factory(App\User::class)->create();
+    $post->project->addMember($user);
+
+    return [
+        'post_id' => $post->id,
+        'user_id' => $user->id,
+        'body' => $faker->sentence,
+    ];
+});
