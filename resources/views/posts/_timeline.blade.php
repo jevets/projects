@@ -16,6 +16,13 @@
                     {{ $post->teaser }}
                 </p>
             @endif
+            <p>
+                <a href="{{ route('posts.show', [$project, $post]) }}#comments" class="post-comments-count">
+                    <i class="fa fa-comment-o"></i>
+                    {{ $post->comments->count() }}
+                    {{ str_plural('Comment', $post->comments->count()) }}
+                </a>
+            </p>
         </li>
     @endforeach
 </ol>

@@ -16,7 +16,7 @@ class ProjectPostsController extends Controller
      */
     public function index(Project $project)
     {
-        $project->load(['posts', 'posts.user']);
+        $project->load(['posts', 'posts.user', 'posts.comments']);
 
         return view('posts.index', compact('project'));
     }

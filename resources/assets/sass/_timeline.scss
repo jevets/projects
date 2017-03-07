@@ -46,7 +46,7 @@
     .post-title {
         font-weight: 900;
         font-size: $font-size-large;
-        margin: 0;
+        margin: 0.5 * $line-height-computed 0;
     }
 
     .post-timestamp {
@@ -55,5 +55,10 @@
 
     .post-teaser {
         @extend .text-muted;
+    }
+
+    .post-comments-count {
+        color: $gray-light;
+        font-size: 0.8 * $font-size-small;
     }
 }

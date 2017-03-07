@@ -32,7 +32,7 @@
                     @endslot
                 @endcomponent
 
-                <h2 class="page-header">
+                <h2 class="page-header" id="comments">
                     Comments
                 </h2>
 
