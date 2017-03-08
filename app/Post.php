@@ -12,7 +12,9 @@ class Post extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title'];
+    protected $fillable = [
+        'title', 'body', 'user_id', 'project_id',
+    ];
 
     /**
      * @return Illuminate\Database\Eloquent\Relations\HasMany

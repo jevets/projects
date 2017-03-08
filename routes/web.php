@@ -25,6 +25,14 @@ Route::group(['middleware' => 'auth'], function() {
         ->name('posts.create');
     Route::get('{project}/{post}', 'ProjectPostsController@show')
         ->name('posts.show');
+    Route::get('{project}/{post}/edit', 'ProjectPostsController@edit')
+        ->name('posts.edit');
+    Route::post('{project}/posts', 'ProjectPostsController@store')
+        ->name('posts.store');
+    Route::patch('{project}/{post}', 'ProjectPostsController@update')
+        ->name('posts.update');
+    Route::delete('{project}/{post}', 'ProjectPostsController@destroy')
+        ->name('posts.destroy');
 
     Route::post('{project}/posts/{post}/comments', 'ProjectPostCommentsController@store')
         ->name('comments.store');

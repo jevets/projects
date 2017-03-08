@@ -81,7 +81,7 @@
 
         @if (session('message'))
             <div class="container">
-                <div class="alert alert-info">
+                <div class="alert alert-success">
                     {{ session('message') }}
                 </div>
             </div>

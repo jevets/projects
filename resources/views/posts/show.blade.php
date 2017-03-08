@@ -12,7 +12,7 @@
                 </h1>
 
                 @component('_.panel')
-                    @slot('footer')
+                    @slot('title')
                         <div class="row">
                             <div class="col-xs-6">
                                 @datetime($post->created_at)
@@ -29,6 +29,22 @@
                         <div class="post-body">
                             {!! Markdown::convertToHtml($post->body) !!}
                         </div>
+                    @endslot
+                    @slot('footer')
+                        <form action="{{ route('posts.destroy', [$project, $post]) }}" class="form-inline" method="POST">
+                            <a href="{{ route('posts.edit', [$project, $post]) }}" class="btn btn-link btn-sm">
+                                <i class="fa fa-pencil-square-o"></i>
+                                Edit Post
+                            </a>
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+                            <button type="submit" class="btn btn-link btn-sm">
+                                <span class="text-danger">
+                                    <i class="fa fa-times-circle"></i>
+                                    Delete Post
+                                </span>
+                            </button>
+                        </form>
                     @endslot
                 @endcomponent
 
