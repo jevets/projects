@@ -1,9 +1,14 @@
 @component('_.panel')
     @slot('title')
-        <i class="fa fa-comment-o"></i>
-        {{ $comment->user->name }}
-        &mdash;
-        @datetime($comment->created_at)
+        <div class="row">
+            <div class="col-sm-6">
+                <i class="fa fa-comment-o"></i>
+                {{ $comment->user->name }}        
+            </div>
+            <div class="col-sm-6 text-right">
+                @datetime($comment->created_at)
+            </div>
+        </div>
     @endslot
     @slot('body')
         {!! Markdown::convertToHtml($comment->body) !!}

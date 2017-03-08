@@ -28,19 +28,15 @@
 
                 <h2 class="page-header">Users</h2>
 
-                @component('_.panel')
-                    @slot('title', 'Admins')
-                    @include('users._list-table', [
-                        'users' => $project->admins
-                    ])
-                @endcomponent
+                @include('users._panel-list', [
+                    'title' => 'Admins',
+                    'users' => $project->admins,
+                ])
 
-                @component('_.panel')
-                    @slot('title', 'Members')
-                    @include('users._list-table', [
-                        'users' => $project->members
-                    ])
-                @endcomponent
+                @include('users._panel-list', [
+                    'title' => 'Members',
+                    'users' => $project->members,
+                ])
 
                 <h2 class="page-header">
                     Danger Zone

@@ -18,7 +18,7 @@
                 @if (! $project->posts->isEmpty())
                     @include('posts._timeline', ['posts' => $project->posts])
                 @else
-                    @component('_.alert')
+                    @component('_.alert', ['type' => 'warning'])
                         No posts to show
                     @endcomponent
                     @include('projects._description', compact('project'))

@@ -1,5 +1,5 @@
 @if ($project->description)
-    @component('_.panel', ['type' => 'info'])
+    @component('_.panel')
         @slot('title', 'Project Description')
         @slot('body')
             {{ $project->description }}
