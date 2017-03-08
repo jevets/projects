@@ -6,11 +6,11 @@
             <div class="col-sm-8 col-sm-offset-2">
 
                 <h1 class="page-header">
-                    Create Post 
-                    <small>{{ $project->name }}</small>
+                    {{ $project->name }}
                 </h1>
 
                 @component('_.panel')
+                    @slot('title', 'Add a Post')
                     @slot('body')
                         <form action="{{ route('posts.store', $project) }}" method="POST">
                             {{ csrf_field() }}

@@ -18,10 +18,13 @@
                 @if (! $project->posts->isEmpty())
                     @include('posts._timeline', ['posts' => $project->posts])
                 @else
-                    @component('_.alert', ['type' => 'warning'])
-                        No posts to show
-                    @endcomponent
                     @include('projects._description', compact('project'))
+                    @component('_.alert', ['type' => 'info'])
+                        No posts yet.
+                        <a href="{{ route('posts.create', $project) }}" class="alert-link">
+                            Add one now
+                        </a>
+                    @endcomponent
                 @endif
 
             </div>
