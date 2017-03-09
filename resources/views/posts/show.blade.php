@@ -15,7 +15,7 @@
                     @slot('title')
                         <div class="row">
                             <div class="col-xs-6">
-                                @datetime($post->created_at)
+                                @datetime($post->published_at)
                             </div>
                             <div class="col-xs-6 text-right">
                                 by {{ $post->user->name }}

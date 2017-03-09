@@ -12,8 +12,16 @@ class Post extends Model
     /**
      * @var array
      */
+    protected $dates = [
+        'published_at',
+    ];
+
+    /**
+     * @var array
+     */
     protected $fillable = [
-        'title', 'body', 'user_id', 'project_id',
+        'title', 'body', 'published_at',
+        'user_id', 'project_id',
     ];
 
     /**

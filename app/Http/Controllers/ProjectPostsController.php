@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Project;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProjectPostsController extends Controller
@@ -31,6 +32,8 @@ class ProjectPostsController extends Controller
     {
         $post = new Post;
 
+        $post->published_at = Carbon::now();
+
         return view('posts.create', compact('project', 'post'));
     }
 
@@ -44,14 +47,16 @@ class ProjectPostsController extends Controller
     public function store(Project $project, Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
+            'title'        => 'required',
+            'body'         => 'required',
+            'published_at' => 'required|date',
         ]);
 
         $post = $project->posts()->create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'user_id' => auth()->user()->id,
+            'title'        => $request->title,
+            'body'         => $request->body,
+            'user_id'      => auth()->user()->id,
+            'published_at' => Carbon::parse($request->published_at),
         ]);
 
         return redirect()
@@ -69,7 +74,7 @@ class ProjectPostsController extends Controller
     public function show(Project $project, Post $post)
     {
         $post->load('user', 'comments', 'comments.user');
-        
+
         return view('posts.show', compact('project', 'post'));
     }
 
@@ -96,13 +101,15 @@ class ProjectPostsController extends Controller
     public function update(Request $request, Project $project, Post $post)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
+            'title'        => 'required',
+            'body'         => 'required',
+            'published_at' => 'required|date',
         ]);
 
         $post->update([
-            'title' => $request->title,
-            'body' => $request->body,
+            'title'        => $request->title,
+            'body'         => $request->body,
+            'published_at' => Carbon::parse($request->published_at),
         ]);
 
         return redirect()

@@ -2,7 +2,7 @@
     @foreach ($project->posts as $post)
         <li class="post">
             <div class="post-timestamp">
-                @datetime($post->created_at)
+                @datetime($post->published_at)
                 by 
                 {{ $post->user->name }}
             </div>

@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('teaser')->nullable();
             $table->text('body');
+            $table->timestamp('published_at');
             $table->timestamps();
 
             $table->foreign('user_id')

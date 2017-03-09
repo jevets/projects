@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -41,11 +43,12 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     $user = App\User::inRandomOrder()->first() ?? factory(App\User::class)->create();
 
     return [
-        'user_id'    => $user->id,
-        'project_id' => $project->id,
-        'title'      => title_case($faker->words(rand(1, 3), true)),
-        'body'       => $faker->paragraphs(rand(1, 4), true),
-        'teaser'     => $faker->optional()->sentence,
+        'user_id'      => $user->id,
+        'project_id'   => $project->id,
+        'title'        => title_case($faker->words(rand(1, 3), true)),
+        'body'         => $faker->paragraphs(rand(1, 4), true),
+        'teaser'       => $faker->optional()->sentence,
+        'published_at' => Carbon::now(),
     ];
 });
 

@@ -15,16 +15,7 @@
                     </small>
                 </h1>
 
-                <div class="list-group">
-                    @foreach ($projects as $project)
-                        <a href="{{ route('posts.index', $project) }}" class="list-group-item">
-                            @if (auth()->user()->isProjectAdmin($project))
-                                <i class="fa fa-star"></i>
-                            @endif
-                            {{ $project->name }}
-                        </a>
-                    @endforeach
-                </div>
+                @include('projects._list-group', compact('projects'))
 
             </div>
         </div>
