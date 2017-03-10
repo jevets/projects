@@ -36,5 +36,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::post('{project}/posts/{post}/comments', 'ProjectPostCommentsController@store')
         ->name('comments.store');
+    Route::delete('{project}/{post}/comments/{comment}', 'ProjectPostCommentsController@destroy')
+        ->name('comments.destroy');
 
 });

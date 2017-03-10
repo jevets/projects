@@ -25,11 +25,11 @@ class Comment extends Model
     }
 
     /**
-     * @return \App\Project
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function project()
     {
-        return $this->post->project;
+        return $this->belongsTo(Project::class);
     }
 
     /**

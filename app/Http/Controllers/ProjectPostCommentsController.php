@@ -58,11 +58,17 @@ class ProjectPostCommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \App\Project  $project
+     * @param  \App\Post  $post
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Project $project, Post $post, Comment $comment)
     {
-        //
+        $comment->delete();
+
+        return redirect()
+            ->route('posts.show', [$project, $post])
+            ->with('message', 'Comment deleted');
     }
 }
