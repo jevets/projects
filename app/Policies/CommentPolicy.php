@@ -54,7 +54,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        if ($user->isProjectAdmin($comment->post->project)) {
+        if ($user->isProjectAdmin($comment->project)) {
             return true;
         }
 
